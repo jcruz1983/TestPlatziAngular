@@ -1,0 +1,96 @@
+<div class="container">
+  <pre>
+      <code>
+        {{ persona() | json }}
+      </code>
+     </pre>
+  <h1>Hola este es mi primer proyecto</h1>
+  <h2>{{title()}}</h2>
+  <ul>
+    @for (task of tasks(); track task) {
+    <li>{{task}}</li>
+    }
+  </ul>
+  <hr />
+  <h2>{{ 'Hola'.repeat(4) }}</h2>
+  <p> la suma de 3 + 3 es {{ 3 + 3 }}</p>
+  <p>Hola soy {{ nombre() }} y mi edad es {{ edad() }}</p>
+  <hr />
+  <img [src]="persona().avatar" alt="Imagen aleatoria" />
+  <br>
+  <input type="text" placeholder="Escribe algo" [value]="persona().nombre" />
+  <br>
+  <button [disabled]="inactivo">Cliqueame</button>
+  <p>person: {{persona().nombre}}</p>
+  <hr />
+  <button (click)="clickHandler()">Click alert</button>
+  <button (dblclick)="clickHandler()">Doble click</button>
+
+  <input type="text" [value]="persona().edad" (change)="changeHandler($event)" placeholder="Escribe algo" />
+  <p>(keydown)</p>
+  <input type="text" [value]="persona().nombre" (keydown)="keydownHandler($event)" placeholder="Escribe algo" />
+  <p>(keydown)</p>
+  <input type="text" [value]="persona().nombre" (keydown.shift.t)="clickHandler()" placeholder="Escribe algo" />
+  <hr />
+  <ul>
+    <p>total: {{ tasks().length }}</p>
+    @for (task of tasks(); track $index) {
+    <li>{{$index}} - {{task}}</li>
+    }
+  </ul>
+  <h1>Signals </h1>
+  <input type="text" [value]="persona().nombre" (change)="changeHandler($event)" placeholder="Escribe algo" />
+  <p>Nombre: {{ persona().nombre }}</p>
+  <p>Nombre: {{ nombre() }}</p>
+  <hr />
+  <p>(change)</p>
+  <input type="number" [value]="persona().edad" (change)="changeAge($event)" placeholder="Escribe la edad" />
+  <p>(change)</p>
+  @if (1 !== 1) {
+  <div>My content</div>
+  }
+  @if (nombre() === 'Juan') {
+  <div>nombre() igual</div>
+  }
+  @if (persona().nombre !== 'Juan' && persona().edad >= 18) {
+  <div>Hola {{persona().nombre}} mayor de edad {{persona().edad}}</div>
+  }
+  @else
+  {
+  <div>Hola Juancho menor de edad {{persona().edad}}</div>
+  }
+  <hr />
+  @switch (persona().nombre) {
+  @case ('Pedro') {
+  <div>Pedrinchi</div>
+  }
+  @case ('Juan') {
+  <div>Juancho</div>
+  }
+  @default {
+  <div>Otro nombre</div>
+  }
+  }
+  <hr />
+  <input type="color" [formControl]="colorCtrl" />
+   <p>Color: {{ colorCtrl.value }}</p>
+   <svg>>
+    <g>
+      <rect x="0" y="0" width="100" height="100" [attr.fill]="colorCtrl.value"></rect>
+    </g>
+  </svg>
+  <hr />
+   <input type="number" [formControl]="widthCtrl" />
+   <span class="box" [style.width.px]="widthCtrl.value"></span>
+   <hr />
+   <p>
+     <input type="text" [formControl]="nameCtrl" />
+     <!-- @if(nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)) { -->
+     <br />
+     <span class="message-error" [class.show]="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)">Nombre chueco</span>
+     <!-- } -->
+   </p>
+   <p>
+    <input type="text"/>
+   </p>
+</div>
